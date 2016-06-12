@@ -1,0 +1,14 @@
+' put this file in C:\Program Files (x86)\Microsoft Office\Templates\1033\.... to prevent office from blocking this macro
+
+
+Sub SayHello(ByVal control As IRibbonControl)
+    Set m = ActivePresentation
+    
+    m.Slides(ActiveWindow.Selection.SlideRange.SlideNumber).Shapes.PasteSpecial (ppPasteText)
+    
+    Dim myText As String
+    myText = m.Slides(ActiveWindow.Selection.SlideRange.SlideNumber).Shapes(m.Slides(ActiveWindow.Selection.SlideRange.SlideNumber).Shapes.Count).TextFrame.TextRange.Text
+    
+    m.Slides(ActiveWindow.Selection.SlideRange.SlideNumber).Shapes(m.Slides(ActiveWindow.Selection.SlideRange.SlideNumber).Shapes.Count).TextFrame.TextRange.Text = Replace(myText, Chr(13), " ")
+
+End Sub
