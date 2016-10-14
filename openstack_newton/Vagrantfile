@@ -22,8 +22,8 @@ Vagrant.configure("2") do |config|
 			vb.memory = "2048"
 		end
 
-		config.vm.provision "shell", path: "com-net.sh"
-		config.vm.provision "shell", path: "com.sh"
+		config.vm.provision "shell", path: "https://raw.githubusercontent.com/frontjang/myscriptlets/master/openstack_newton/com-net.sh"
+		config.vm.provision "shell", path: "https://raw.githubusercontent.com/frontjang/myscriptlets/master/openstack_newton/com.sh"
 	end
 	
 	config.vm.define 'ctrl' do |ctrl|
@@ -34,8 +34,8 @@ Vagrant.configure("2") do |config|
 			vb.memory = "4096"
 			#vb.customize ["modifyvm", :id, "--natpf2", "chrony,udp,,323,,323", "--nictype2", "virtio"]
 		end
-		config.vm.provision "shell", path: "ctrl-net.sh"
-		config.vm.provision "shell", path: "ctrl.sh"
+		config.vm.provision "shell", path: "https://raw.githubusercontent.com/frontjang/myscriptlets/master/openstack_newton/ctrl-net.sh"
+		config.vm.provision "shell", path: "https://raw.githubusercontent.com/frontjang/myscriptlets/master/openstack_newton/ctrl.sh"
 	end
 
 end
