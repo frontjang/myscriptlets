@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+	def nicSetup(id, config, port)
+		config.vm.provider "virtualbox" do |v|
+			v.customize ["modifyvm", id, "--nic1", "natnetwork", "--nat-network1", "NatNetwork", "--nictype1", "virtio"]
+			v.customize ["modifyvm", id, "--natdnsproxy1", "on", "--natdnspassdomain1", "off"]
+			
+			v.customize ["modifyvm", id, "--nic2", "nat", "--nictype2", "virtio"]
+			v.customize ["modifyvm", id, "--natpf2", "ssh,tcp,,"+port+",,22", "--nictype2", "virtio"]
+
+		end
+	end 
+
+	config.vm.define 'comA' do |com|
+		com.vm.box = "box-cutter/ubuntu1604-desktop"
+		com.vm.hostname = 'compute1'
+		nicSetup(:id, com, "2200")
+		com.vm.provider "virtualbox" do |vb|
+			vb.memory = "2048"
+		end
+
+		config.vm.provision "shell", path: "com-net.sh"
+		config.vm.provision "shell", path: "com.sh"
+	end
+	
+	config.vm.define 'ctrl' do |ctrl|
+		ctrl.vm.box = "box-cutter/ubuntu1604-desktop"
+		ctrl.vm.hostname = 'controller'
+		nicSetup(:id, ctrl, "2222")
+		ctrl.vm.provider "virtualbox" do |vb|
+			vb.memory = "4096"
+			#vb.customize ["modifyvm", :id, "--natpf2", "chrony,udp,,323,,323", "--nictype2", "virtio"]
+		end
+		config.vm.provision "shell", path: "ctrl-net.sh"
+		config.vm.provision "shell", path: "ctrl.sh"
+	end
+
+end
