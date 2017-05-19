@@ -1,5 +1,5 @@
 Sub ChangeSubjectForward(Item As Outlook.MailItem)
-
+Item.UnRead = False
 'Item.Subject = Item.Subject
 'Item.Save
 
