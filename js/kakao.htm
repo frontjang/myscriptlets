@@ -1,0 +1,21 @@
+<input id="katalk1" type="button" value="낚으러 가기" style="height: 80px;">
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+
+	Kakao.init('46231d07d4c8359c79dcadbbd7bbd04d');
+	Kakao.Link.createTalkLinkButton({
+		container: '#katalk1',
+		label:  '선물과 메세지를 보냈습니다.\n자세한 내용은 선물함에서 확인해주세요.',
+		image: {
+		        src: 'http://cfile2.uf.tistory.com/image/27659D375697546430C530',
+			width: '320',
+			height: '416'
+		},
+		webButton:{
+			text: '선물함으로 가기',
+			url: 'http://cfile9.uf.tistory.com/image/23176A38569726460F5F4D'
+		}
+
+
+	});
+</script>
